@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--自定义数字加减控件的  自定义属性-->
+<resources>
+    <declare-styleable name="NumberAddSubView">
+        <attr name="defValue" format="integer|reference"/>
+        <attr name="minValue" format="integer|reference"/>
+        <attr name="maxValue" format="integer|reference"/>
+        <attr name="addsubColor" format="integer|reference"/>
+        <attr name="numColor" format="integer|reference"/>
+    </declare-styleable>
+</resources>

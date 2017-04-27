@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/selector_list_item"
+              android:gravity="center_vertical"
+              android:orientation="horizontal"
+              android:padding="5dp">
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        style="@style/customCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusable="false"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:background="#50f0"
+            android:orientation="vertical"
+            >
+
+
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#f00"
+                android:maxLines="3"
+                android:text="商品描述"
+                android:textColor="@color/gray"
+                android:textSize="16sp"
+
+                />
+
+            <TextView
+                android:id="@+id/text_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:textColor="@color/crimson"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="10dp"
+                />
+
+            <!-- <cniao5.com.cniao5shop.widget.NumberAddSubView
+                 android:id="@+id/num_control"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                 app:minValue="1"
+                 />-->
+            <com.trilink.ghbaqi.cainiaoshopping01.view.widget.CustomNumView
+                android:layout_marginBottom="10dp"
+                android:id="@+id/numberview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:addsubColor="@color/red"
+                app:defValue="1"
+                app:maxValue="10"
+                app:minValue="1"
+                app:numColor="@color/green"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
