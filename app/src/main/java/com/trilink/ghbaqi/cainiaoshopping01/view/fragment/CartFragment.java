@@ -21,6 +21,7 @@ import com.trilink.ghbaqi.cainiaoshopping01.adapter.CartAdapter;
 import com.trilink.ghbaqi.cainiaoshopping01.adapter.decoration.DividerItemDecoration;
 import com.trilink.ghbaqi.cainiaoshopping01.bean.ShoppingCart;
 import com.trilink.ghbaqi.cainiaoshopping01.utils.CartManager;
+import com.trilink.ghbaqi.cainiaoshopping01.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -84,10 +85,12 @@ public class CartFragment extends BaseFragment implements BaseAdapter.OnItemClic
             mCartAdapter.refreshData(list);
             mCartAdapter.refreshTotalPrice(mTvTotal);
             mRlBottom.setVisibility(View.VISIBLE);
+            mTv_edit.setVisibility(View.VISIBLE);
         } else {
             mRecycleview.setVisibility(View.GONE);
             mTvWander.setVisibility(View.VISIBLE);
             mRlBottom.setVisibility(View.GONE);
+            mTv_edit.setVisibility(View.INVISIBLE);
         }
 
     }
@@ -205,7 +208,7 @@ public class CartFragment extends BaseFragment implements BaseAdapter.OnItemClic
      * 去结算
      */
     private void toBuy() {
-
+        ToastUtil.showToast(mActivity,"去结算");
     }
 
     /**

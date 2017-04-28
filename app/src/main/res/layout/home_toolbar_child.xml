@@ -16,6 +16,7 @@
         android:layout_gravity="center_vertical"
         />
     <EditText
+        android:maxLines="1"
         android:id="@+id/et_proinfo"
         android:textColor="@color/white"
         android:layout_toRightOf="@+id/iv_search"

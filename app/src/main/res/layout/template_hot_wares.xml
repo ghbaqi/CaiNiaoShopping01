@@ -10,85 +10,78 @@
     android:layout_marginRight="5dp"
     android:layout_marginTop="2dp"
     app:cardBackgroundColor="#fff"
-    app:contentPadding="10dp"
-    app:cardCornerRadius="4dp">
+    app:cardCornerRadius="4dp"
+    app:contentPadding="10dp">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/selector_list_item"
-    android:padding="5dp"
-    >
-
-
-
-    <ImageView
-        android:layout_width="@dimen/ware_img_width"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:id="@+id/drawee_view"
-        android:layout_alignParentLeft="true"
-
-        />
-
-
-
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@+id/drawee_view">
+        android:background="@drawable/selector_list_item"
+        android:padding="5dp"
+        >
 
-        <TextView
-            android:id="@+id/text_title"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/drawee_view"
+            android:layout_width="@dimen/ware_img_width"
             android:layout_height="wrap_content"
-            style="@style/ware_title"
+            android:layout_alignParentLeft="true"
+            android:background="@null"
 
             />
 
-
-        <View
-            style="@style/line_vertical"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
-
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            >
-
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/drawee_view"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/text_price"
+                android:id="@+id/text_title"
+                style="@style/ware_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/ware_price"
-
-               android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
                 />
 
-            <Button
-                android:id="@+id/btn_add"
-                android:layout_width="wrap_content"
+            <View
+                style="@style/line_vertical"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/bigRedButton"
-                android:layout_marginTop="20dp"
-                android:text="立即购买"
 
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                />
-        </RelativeLayout>
+                >
 
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/text_price"
+                    style="@style/ware_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    />
+
+                <Button
+                    android:id="@+id/btn_add"
+                    style="@style/bigRedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+
+                    android:layout_marginTop="20dp"
+                    android:text="立即购买"
+                    />
+            </RelativeLayout>
 
 
+        </LinearLayout>
 
-</RelativeLayout>
+
+    </RelativeLayout>
 </android.support.v7.widget.CardView>

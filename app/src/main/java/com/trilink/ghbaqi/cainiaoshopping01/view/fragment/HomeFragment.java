@@ -1,6 +1,7 @@
 package com.trilink.ghbaqi.cainiaoshopping01.view.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
@@ -14,10 +15,12 @@ import android.widget.Toast;
 
 import com.trilink.ghbaqi.cainiaoshopping01.R;
 import com.trilink.ghbaqi.cainiaoshopping01.adapter.HomeCatgoryAdapter;
+import com.trilink.ghbaqi.cainiaoshopping01.bean.Campaign;
 import com.trilink.ghbaqi.cainiaoshopping01.bean.HomeCampaign;
 import com.trilink.ghbaqi.cainiaoshopping01.http.BeanListCallback;
 import com.trilink.ghbaqi.cainiaoshopping01.http.OkHttpManager;
 import com.trilink.ghbaqi.cainiaoshopping01.utils.Contants;
+import com.trilink.ghbaqi.cainiaoshopping01.view.activity.WaresListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +32,7 @@ import butterknife.ButterKnife;
  * Created by ghbaqi on 2017/4/15.
  */
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements HomeCatgoryAdapter.OnCampaignClickListener {
     @BindView(R.id.toolbar)
     Toolbar      mToolbar;
     @BindView(R.id.recycleview)
@@ -53,6 +56,7 @@ public class HomeFragment extends BaseFragment {
     private void initRecycleView() {
         mDatas = new ArrayList<>();
         mCatgoryAdapter = new HomeCatgoryAdapter(mDatas, getActivity());
+        mCatgoryAdapter.setOnCampaignClickListener(this);
         mRecycleview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mRecycleview.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         mRecycleview.setAdapter(mCatgoryAdapter);
@@ -88,5 +92,16 @@ public class HomeFragment extends BaseFragment {
     private void initToolBar() {
         mToolbar.addView(LayoutInflater.from(getActivity()).inflate(R.layout.home_toolbar_child, null));
 
+    }
+
+    /**
+     * 点击分类列表图片 跳转到 商品列表 activity
+     */
+    @Override
+    public void onClick(View view, Campaign campaign) {
+
+        Intent intent = new Intent(mActivity, WaresListActivity.class);
+        intent.putExtra(WaresListActivity.COMPAIGN_ID,campaign.getId());
+        startActivity(intent);
     }
 }
