@@ -25,6 +25,11 @@ public class HotWaresAdapter extends RecyclerView.Adapter<HotWaresAdapter.ViewHo
     private LayoutInflater mInflater;
     private Context        mContext;
     private int mItemLayoutId = R.layout.template_hot_wares;
+    private OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
 
     public HotWaresAdapter(List<Wares> wares) {
 
@@ -44,7 +49,7 @@ public class HotWaresAdapter extends RecyclerView.Adapter<HotWaresAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         Wares wares = getData(position);
         Glide.with(mContext).load(wares.getImgUrl()).into(holder.draweeView);
@@ -61,6 +66,15 @@ public class HotWaresAdapter extends RecyclerView.Adapter<HotWaresAdapter.ViewHo
                 }
             });
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemClick(holder.itemView,position);
+                }
+            }
+        });
+
 
 
 
@@ -141,5 +155,9 @@ public class HotWaresAdapter extends RecyclerView.Adapter<HotWaresAdapter.ViewHo
             textTitle = (TextView) itemView.findViewById(R.id.text_title);
             textPrice = (TextView) itemView.findViewById(R.id.text_price);
         }
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(View v,int position);
     }
 }

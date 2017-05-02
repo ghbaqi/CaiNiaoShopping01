@@ -1,5 +1,6 @@
 package com.trilink.ghbaqi.cainiaoshopping01;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.trilink.ghbaqi.cainiaoshopping01.view.activity.BaseActivity;
+import com.trilink.ghbaqi.cainiaoshopping01.view.activity.WaresDetailActivity;
 import com.trilink.ghbaqi.cainiaoshopping01.view.fragment.CartFragment;
 import com.trilink.ghbaqi.cainiaoshopping01.view.fragment.CategoryFragment;
 import com.trilink.ghbaqi.cainiaoshopping01.view.fragment.HomeFragment;
@@ -39,6 +41,18 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         initTabHost();
+    }
+
+    //  Activity 启动模式 的应用
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        // 从 商品详情 点击立即购买 则 跳转到购物车模块 .
+        String extraFromDetailAct = getIntent().getStringExtra(WaresDetailActivity.EXTRA_FROM_DETAILACTIVITY);
+        if (extraFromDetailAct != null && extraFromDetailAct.equals(WaresDetailActivity.EXTRA_FROM_DETAILACTIVITY)) {
+            mTabhost.setCurrentTab(3);
+        }
     }
 
     private void initTabHost() {

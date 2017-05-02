@@ -1,6 +1,7 @@
 package com.trilink.ghbaqi.cainiaoshopping01.view.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -38,8 +39,9 @@ import butterknife.ButterKnife;
  * 商品列表
  */
 
-public class WaresListActivity extends BaseActivity implements TabLayout.OnTabSelectedListener, View.OnClickListener {
+public class WaresListActivity extends BaseActivity implements TabLayout.OnTabSelectedListener, View.OnClickListener, HotWaresAdapter.OnItemClickListener {
     public static final String COMPAIGN_ID = "compaignId";
+    public static final String EXTRA_WARES   = "extra_wares";
     @BindView(R.id.toolbar)
     Toolbar   mToolbar;
     @BindView(R.id.tabLayout)
@@ -139,6 +141,7 @@ public class WaresListActivity extends BaseActivity implements TabLayout.OnTabSe
         mRecycleview.setItemAnimator(new DefaultItemAnimator());
         mWaresAdapter = new HotWaresAdapter(mDatas);
         mRecycleview.setAdapter(mWaresAdapter);
+        mWaresAdapter.setOnItemClickListener(this);
 
         mRefreshlayout.setLoadMore(true);
         mRefreshlayout.setMaterialRefreshListener(new MaterialRefreshListener() {
@@ -220,5 +223,14 @@ public class WaresListActivity extends BaseActivity implements TabLayout.OnTabSe
                 }
                 break;
         }
+    }
+
+    // 条目点击事件 , 点击跳转到商品详情 .
+    @Override
+    public void onItemClick(View v, int position) {
+        Wares wares = mDatas.get(position);
+        Intent intent = new Intent(WaresListActivity.this, WaresDetailActivity.class);
+        intent.putExtra(EXTRA_WARES,wares);
+        startActivity(intent);
     }
 }

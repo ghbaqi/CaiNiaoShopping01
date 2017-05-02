@@ -3,7 +3,7 @@
   <component name="Statistic">
     <option name="excludedDirectories">
       <list>
-        <option value="$PROJECT_DIR$" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/trilink/ghbaqi" />
       </list>
     </option>
   </component>

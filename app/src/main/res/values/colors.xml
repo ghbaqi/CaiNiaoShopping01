@@ -13,6 +13,11 @@
 
     <item type="color" name="green_btn_color_disable">@color/app_green_alpha</item>
 
+    <color name="color_999999">#999999</color>
+    <color name="color_cccccc">#cccccc</color>
+    <color name="color_cdcdcd">#cdcdcd</color>
+
+
 
     <color name="green_btn_color_pressed">#ff298409</color>
     <color name="red_btn_color_normal">#ffff5454</color>
