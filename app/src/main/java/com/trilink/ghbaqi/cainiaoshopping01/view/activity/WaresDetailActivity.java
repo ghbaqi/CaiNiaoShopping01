@@ -107,7 +107,6 @@ public class WaresDetailActivity extends BaseActivity implements View.OnClickLis
                 mProgressDialog.dismiss();
                 mAppInterface.showDetail();      // 安卓 调用 HTML
             }
-
         });
     }
 
