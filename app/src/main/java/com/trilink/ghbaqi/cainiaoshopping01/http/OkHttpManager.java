@@ -5,6 +5,7 @@ import android.os.Looper;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -81,6 +82,11 @@ public class OkHttpManager {
                 }
             }
         });
+    }
+
+
+    public void commonGet(String url,HashMap<String,Object> params,final BaseCallBack callBack) {
+        commonGet(buildUrl(url,params),callBack);
     }
 
     /**
@@ -222,6 +228,18 @@ public class OkHttpManager {
 
         });
 
+    }
+
+    private String buildUrl(String url, HashMap<String,Object> params){
+        String newUrl = null;
+        if (params==null||params.size()==0)
+            return url;
+        newUrl = url+"?";
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            newUrl = newUrl + entry.getKey()+"="+entry.getValue()+"&" ;
+        }
+        newUrl = newUrl.substring(0,newUrl.length()-1);
+        return newUrl;
     }
 
 }

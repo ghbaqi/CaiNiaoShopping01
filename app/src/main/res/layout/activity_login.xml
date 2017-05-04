@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:toolbar="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:background="@color/colorPrimary"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:gravity="center"
+            android:text="菜鸟登录"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="55dp"/>
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/selector_view_block"
+        android:orientation="vertical"
+        android:padding="@dimen/largePadding"
+        >
+
+        <com.trilink.ghbaqi.cainiaoshopping01.view.widget.ClearEditText
+            android:id="@+id/et_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/icon_telphone_32"
+            android:drawablePadding="20dp"
+            android:hint="请输入手机号码"
+            android:inputType="phone"
+            android:background="@drawable/shape_clearedittext_bg"
+            />
+
+        <View
+            style="@style/line_vertical"/>
+
+        <com.trilink.ghbaqi.cainiaoshopping01.view.widget.ClearEditText
+            android:layout_marginTop="10dp"
+            android:id="@+id/et_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/icon_lock"
+            android:drawablePadding="20dp"
+            android:hint="请输入登录密码"
+            android:inputType="textPassword"
+            android:background="@drawable/shape_clearedittext_bg"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_login"
+        style="@style/bigRedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="30dp"
+        android:text="登 录"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/largePadding">
+
+        <TextView
+            android:background="@drawable/selector_list_item"
+            android:padding="5dp"
+            android:id="@+id/tv_register"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="注册账号"
+            android:textColor="@color/blue"
+            android:textSize="12sp"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_forgetsecret"
+            android:background="@drawable/selector_list_item"
+            android:padding="5dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="忘记密码"
+            android:textColor="@color/blue"
+            android:textSize="12sp"
+            />
+    </LinearLayout>
+
+</LinearLayout>

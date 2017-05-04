@@ -11,6 +11,8 @@ import android.widget.RelativeLayout;
 
 import com.trilink.ghbaqi.cainiaoshopping01.R;
 
+import java.util.HashMap;
+
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
@@ -22,7 +24,6 @@ import cn.sharesdk.wechat.moments.WechatMoments;
 /**
  * Created by ghbaqi on 2017/4/1.
  *
- *   TODO : 加一个分享的接口回调
  */
 
 public class ShareDialog extends Dialog implements View.OnClickListener {
@@ -30,24 +31,30 @@ public class ShareDialog extends Dialog implements View.OnClickListener {
     private RelativeLayout         mBt_share_qq;
     private Context                context;
     private Platform.ShareParams   shareParams;
-    private PlatformActionListener mListener;
+    private   OnShareActionListener mShareActionListener;
 
-    public void setListener(PlatformActionListener listener) {
-        mListener = listener;
+    public void setShareActionListener(OnShareActionListener shareActionListener) {
+        mShareActionListener = shareActionListener;
     }
 
-    public ShareDialog(Context context, Platform.ShareParams shareParams, PlatformActionListener listener) {
+    public ShareDialog(Context context, Platform.ShareParams shareParams, OnShareActionListener listener) {
         super(context, R.style.ShareDialogCustom);
         this.context = context;
         this.shareParams = shareParams;
-
+        mShareActionListener = listener;
     }
 
-    public ShareDialog(Context context, Platform.ShareParams shareParams, int themeResId) {
-        super(context, themeResId);
+    public ShareDialog(Context context, Platform.ShareParams shareParams) {
+        super(context, R.style.ShareDialogCustom);
         this.context = context;
         this.shareParams = shareParams;
     }
+
+//    private ShareDialog(Context context, Platform.ShareParams shareParams, int themeResId) {
+//        super(context, themeResId);
+//        this.context = context;
+//        this.shareParams = shareParams;
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,24 +79,58 @@ public class ShareDialog extends Dialog implements View.OnClickListener {
         findViewById(R.id.moment_layout).setOnClickListener(this);
         findViewById(R.id.qzone_layout).setOnClickListener(this);
         findViewById(R.id.weixin_layout).setOnClickListener(this);
+        findViewById(R.id.tv_cancel).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
+        String platform = null;
         switch (v.getId()) {
             case R.id.qq_layout:
-                ShareSDK.getPlatform(QQ.NAME).share(shareParams);
+                platform = QQ.NAME;
+                ShareSDK.getPlatform(platform).share(shareParams);
+
                 break;
             case R.id.moment_layout:   // 微信朋友圈
-                ShareSDK.getPlatform(WechatMoments.NAME).share(shareParams);
+                platform = WechatMoments.NAME;
+                ShareSDK.getPlatform(platform).share(shareParams);
                 break;
             case R.id.weixin_layout:   // 微信好友
-                ShareSDK.getPlatform(Wechat.NAME).share(shareParams);
+                platform = Wechat.NAME;
+                ShareSDK.getPlatform(platform).share(shareParams);
                 break;
             case R.id.qzone_layout:
-                ShareSDK.getPlatform(QZone.NAME).share(shareParams);
+                platform = QZone.NAME;
+                ShareSDK.getPlatform(platform).share(shareParams);
+                break;
+            case R.id.tv_cancel:
+                ShareDialog.this.dismiss();
                 break;
         }
-//        ShareManager.getInstance().share(bean,mListener);
+
+        if (mShareActionListener != null) {
+            ShareSDK.getPlatform(platform).setPlatformActionListener(new PlatformActionListener() {
+                @Override
+                public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                    mShareActionListener.onComplete(platform,i,hashMap);
+                }
+
+                @Override
+                public void onError(Platform platform, int i, Throwable throwable) {
+                    mShareActionListener.onError(platform,i,throwable);
+                }
+
+                @Override
+                public void onCancel(Platform platform, int i) {
+                    mShareActionListener.onCancel(platform,i);
+                }
+            });
+        }
+    }
+
+   public interface OnShareActionListener{
+        void onComplete(Platform platform, int i, HashMap<String, Object> hashMap);
+        void onError(Platform platform, int i, Throwable throwable);
+        void onCancel(Platform platform, int i);
     }
 }

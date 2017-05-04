@@ -1,4 +1,4 @@
-package com.trilink.ghbaqi.cainiaoshopping01.app;
+package com.trilink.ghbaqi.cainiaoshopping01.global;
 
 import android.app.Application;
 

@@ -39,8 +39,8 @@ public class WaresDetailActivity extends BaseActivity implements View.OnClickLis
     Toolbar mToolbar;
     @BindView(R.id.webview)
     WebView mWebview;
-    private Wares mWares;
-    private WebSettings mSettings;
+    private Wares           mWares;
+    private WebSettings     mSettings;
     private WebAppInterface mAppInterface;
 
     @Override
@@ -92,9 +92,9 @@ public class WaresDetailActivity extends BaseActivity implements View.OnClickLis
         mSettings.setAppCacheEnabled(true);
         mWebview.loadUrl(Contants.API.WARES_DETAIL);
         mAppInterface = new WebAppInterface();
-        mWebview.addJavascriptInterface(mAppInterface,"appInterface");   // 添加 安卓 与 HTML 交互的接口     此处 接口 名字 要与 HTML 中的 一致 !!!!
+        mWebview.addJavascriptInterface(mAppInterface, "appInterface");   // 添加 安卓 与 HTML 交互的接口     此处 接口 名字 要与 HTML 中的 一致 !!!!
 
-        mWebview.setWebViewClient(new WebViewClient(){
+        mWebview.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -114,24 +114,24 @@ public class WaresDetailActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_title:
-//                share();
+                //                share();
                 break;
         }
     }
 
 
     private void share() {
-        ToastUtil.showToast(this,"分享功能!!");
+        //        ToastUtil.showToast(this,"分享功能!!");
         Platform.ShareParams shareParams = new Platform.ShareParams();
-        shareParams.setImageUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490962864191&di=d0a0848008ceef6fe5aacdddf4b88328&imgtype=0&src=http%3A%2F%2Fpic.yesky.com%2FuploadImages%2F2016%2F336%2F33%2F69VN0ZT5JG5G.JPG");
-        shareParams.setAuthor("author");
+        shareParams.setImageUrl(mWares.getImgUrl());
+        shareParams.setAuthor(mWares.getName());
         shareParams.setAddress("address");
-        shareParams.setComment("comment");
+        shareParams.setComment(mWares.getDescription());
         shareParams.setTitle("title");
         shareParams.setTitleUrl("http://cn.zpmc.com/index.html");
         ShareDialog shareDialog = null;
         if (shareDialog == null) {
-            shareDialog = new ShareDialog(this, shareParams, null);
+            shareDialog = new ShareDialog(WaresDetailActivity.this,shareParams);
             shareDialog.show();
         }
     }
@@ -139,31 +139,31 @@ public class WaresDetailActivity extends BaseActivity implements View.OnClickLis
     /**
      * html 与 安卓 交互
      */
-    class WebAppInterface{
+    class WebAppInterface {
 
         // 安卓 调用 HTML
         @JavascriptInterface
-        public  void showDetail(){
+        public void showDetail() {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mWebview.loadUrl("javascript:showDetail("+mWares.getId()+")");
+                    mWebview.loadUrl("javascript:showDetail(" + mWares.getId() + ")");
                 }
             });
         }
 
         //  点击立即购买 则跳转到购物车模块
         @JavascriptInterface
-        public void buy(long id){
+        public void buy(long id) {
             Intent intent = new Intent(WaresDetailActivity.this, HomeActivity.class);
-            intent.putExtra(EXTRA_FROM_DETAILACTIVITY,EXTRA_FROM_DETAILACTIVITY);
+            intent.putExtra(EXTRA_FROM_DETAILACTIVITY, EXTRA_FROM_DETAILACTIVITY);
             startActivity(intent);
             WaresDetailActivity.this.finish();
         }
 
         @JavascriptInterface
-        public void addToCart(long id){
-            ToastUtil.showToast(WaresDetailActivity.this,"添加到购物车");
+        public void addToCart(long id) {
+            ToastUtil.showToast(WaresDetailActivity.this, "添加到购物车");
             CartManager.getInstance(WaresDetailActivity.this).put(mWares);
         }
     }
