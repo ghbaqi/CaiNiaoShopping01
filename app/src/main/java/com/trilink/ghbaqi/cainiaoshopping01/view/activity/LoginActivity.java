@@ -1,6 +1,7 @@
 package com.trilink.ghbaqi.cainiaoshopping01.view.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -82,6 +83,7 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.tv_register:
                 ToastUtil.showToast(LoginActivity.this,"注册账号");
+                startActivity(new Intent(LoginActivity.this,GetSmsActivity.class));
                 break;
             case R.id.tv_forgetsecret:
                 ToastUtil.showToast(LoginActivity.this,"忘记密码!");

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="用户注册(1/2)"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="40dp"
+        android:padding="@dimen/largePadding">
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/largePadding"
+            android:paddingBottom="@dimen/largePadding"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="国家或者地区"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_alignParentLeft="true"
+                />
+
+
+            <TextView
+                android:id="@+id/tv_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="中国"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_alignParentRight="true"
+                />
+
+        </RelativeLayout>
+        <View
+            style="@style/line_vertical"
+
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/largePadding"
+            android:paddingBottom="@dimen/largePadding"
+            android:orientation="horizontal"
+            >
+
+
+            <TextView
+                android:id="@+id/tv_CountryCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+86"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginRight="10dp"
+
+                />
+
+            <View
+                style="@style/line_horizontal"/>
+
+            <com.trilink.ghbaqi.cainiaoshopping01.view.widget.ClearEditText
+                android:id="@+id/et_phonenumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/editText_base"
+                android:hint="请输入常用手机号码"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:inputType="phone"
+                />
+        </LinearLayout>
+
+        <View
+            style="@style/line_vertical"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/largePadding"
+            android:paddingBottom="@dimen/largePadding"
+            android:orientation="horizontal"
+            >
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="密码"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginRight="10dp"
+
+                />
+
+            <View
+                style="@style/line_horizontal"/>
+
+            <com.trilink.ghbaqi.cainiaoshopping01.view.widget.ClearEditText
+                android:id="@+id/et_pwd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/editText_base"
+                android:hint="请输入密码"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:inputType="textPassword"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="点击‘下一步’ 按钮，表示你同意《菜鸟窝用户协议》"
+        android:textColor="@color/border_color"
+        android:textSize="12sp"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="@dimen/largePadding"
+
+        />
+
+    <Button
+        android:id="@+id/bt_next"
+        android:layout_marginRight="10dp"
+        android:text="下一步"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+
+
+</LinearLayout>

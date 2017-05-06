@@ -38,3 +38,10 @@
 #
 ## Application classes that will be serialized/deserialized over Gson
 #-keep class com.google.gson.examples.android.model.** { *; }
+
+
+-keep class cn.smssdk.**{*;}
+-keep class com.mob.**{*;}
+
+-dontwarn com.mob.**
+-dontwarn cn.smssdk.**

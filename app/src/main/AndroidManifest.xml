@@ -18,6 +18,12 @@
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
+    <!--短信验证码需要的权限-->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:name=".global.AppApplication"
         android:allowBackup="true"
@@ -74,6 +80,10 @@
         <activity android:name=".view.activity.TreasureActivity"/>
 
         <activity android:name=".view.activity.LoginActivity"/>
+
+        <activity android:name=".view.activity.GetSmsActivity"/>
+
+        <activity android:name=".view.activity.RegisterActivity"/>
 
 
     </application>
