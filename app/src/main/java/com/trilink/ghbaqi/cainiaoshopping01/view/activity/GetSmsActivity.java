@@ -26,11 +26,11 @@ import cn.smssdk.utils.SMSLog;
 public class GetSmsActivity extends BaseActivity implements View.OnClickListener {
 
     public static final int    GET_VERIFICATION_CODE    = 0x03;
-    public static final  int    SUBMIT_VERIFICATION_CODE = 0x04;
+    public static final int    SUBMIT_VERIFICATION_CODE = 0x04;
     public static final int    SMS_RESPONSE_ERROR       = 0X05;
-    public static final String EXTRA_PWD                 = "EXTRA_PWD";
-    public static final String EXTRA_PHONE_NUM           = "EXTRA_PHONE_NUM";
-    public static final String EXTRA_COUNTRY_CODE          = "EXTRA_COUNTRY_CODE";
+    public static final String EXTRA_PWD                = "EXTRA_PWD";
+    public static final String EXTRA_PHONE_NUM          = "EXTRA_PHONE_NUM";
+    public static final String EXTRA_COUNTRY_CODE       = "EXTRA_COUNTRY_CODE";
     private SmsListener   mSmsListener;
     private Handler       mHandler;
     private ClearEditText mEt_phonenum;
@@ -60,10 +60,10 @@ public class GetSmsActivity extends BaseActivity implements View.OnClickListener
                 switch (msg.what) {
                     case GET_VERIFICATION_CODE:    // 获取验证码成功
                         Log.d(TAG, "获取验证码成功");
-                        Intent intent = new Intent(GetSmsActivity.this,RegisterActivity.class);
-                        intent.putExtra(EXTRA_PWD,mPwd);
-                        intent.putExtra(EXTRA_PHONE_NUM,mPhoneNum);
-                        intent.putExtra(EXTRA_COUNTRY_CODE,mCountryCode);
+                        Intent intent = new Intent(GetSmsActivity.this, RegisterActivity.class);
+                        intent.putExtra(EXTRA_PWD, mPwd);
+                        intent.putExtra(EXTRA_PHONE_NUM, mPhoneNum);
+                        intent.putExtra(EXTRA_COUNTRY_CODE, mCountryCode);
                         startActivity(intent);
                         finish();
                         break;
@@ -72,7 +72,7 @@ public class GetSmsActivity extends BaseActivity implements View.OnClickListener
                         break;
                     case SMS_RESPONSE_ERROR:             // 失败
                         Log.d(TAG, "验证码 失败" + msg.obj);
-                        ToastUtil.showToast(GetSmsActivity.this,msg.obj.toString());
+                        ToastUtil.showToast(GetSmsActivity.this, msg.obj.toString());
                         break;
                 }
             }
@@ -96,17 +96,18 @@ public class GetSmsActivity extends BaseActivity implements View.OnClickListener
                 mPhoneNum = mEt_phonenum.getText().toString().trim().replaceAll("\\s*", "");
                 mCountryCode = mTv_countrycode.getText().toString().trim();
                 mPwd = mEt_pwd.getText().toString().trim();
+                if (!checkPhoneNum(mPhoneNum, mCountryCode)) {
+                    //not 86   +86
+                    return;
+                }
                 if (TextUtils.isEmpty(mPwd)) {
                     ToastUtil.showToast(this, "密码不能为空!");
                     return;
-                } else if (mPwd.length()<6||mPwd.length()>12) {
+                } else if (mPwd.length() < 6 || mPwd.length() > 12) {
                     ToastUtil.showToast(this, "密码长度需要在6至12位");
                     return;
                 }
-                if (checkPhoneNum(mPhoneNum, mCountryCode)) {
-                    //not 86   +86
-                    SMSSDK.getVerificationCode(mCountryCode, mPhoneNum);
-                }
+                SMSSDK.getVerificationCode(mCountryCode, mPhoneNum);
                 break;
         }
     }

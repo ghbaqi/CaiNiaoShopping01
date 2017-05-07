@@ -1,5 +1,6 @@
 package com.trilink.ghbaqi.cainiaoshopping01.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,8 +21,11 @@ import com.trilink.ghbaqi.cainiaoshopping01.adapter.BaseAdapter;
 import com.trilink.ghbaqi.cainiaoshopping01.adapter.CartAdapter;
 import com.trilink.ghbaqi.cainiaoshopping01.adapter.decoration.DividerItemDecoration;
 import com.trilink.ghbaqi.cainiaoshopping01.bean.ShoppingCart;
+import com.trilink.ghbaqi.cainiaoshopping01.global.UserManager;
 import com.trilink.ghbaqi.cainiaoshopping01.utils.CartManager;
 import com.trilink.ghbaqi.cainiaoshopping01.utils.ToastUtil;
+import com.trilink.ghbaqi.cainiaoshopping01.view.activity.CreateOrderActivity;
+import com.trilink.ghbaqi.cainiaoshopping01.view.activity.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -60,6 +64,7 @@ public class CartFragment extends BaseFragment implements BaseAdapter.OnItemClic
     private static final int ACTION_EDIT     = 0x011;
     private static final int ACTION_COMPLISH = 0x022;
     private              int mAction         = ACTION_EDIT;
+    private UserManager mUserManager;
 
     @Nullable
     @Override
@@ -76,6 +81,7 @@ public class CartFragment extends BaseFragment implements BaseAdapter.OnItemClic
      * 更新总价格
      */
     private void getData() {
+        mUserManager = UserManager.getInstace();
         mCartManager = CartManager.getInstance(mActivity);
         List<ShoppingCart> list = mCartManager.getAll();
 
@@ -208,7 +214,12 @@ public class CartFragment extends BaseFragment implements BaseAdapter.OnItemClic
      * 去结算
      */
     private void toBuy() {
-        ToastUtil.showToast(mActivity,"去结算");
+        ToastUtil.showToast(mActivity, "去结算");
+        if (mUserManager.getUser() == null) {
+            startActivity(new Intent(mActivity, LoginActivity.class));
+        } else {
+            startActivity(new Intent(mActivity, CreateOrderActivity.class));
+        }
     }
 
     /**

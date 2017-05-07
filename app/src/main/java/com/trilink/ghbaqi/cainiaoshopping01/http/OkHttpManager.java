@@ -2,6 +2,7 @@ package com.trilink.ghbaqi.cainiaoshopping01.http;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -96,11 +97,11 @@ public class OkHttpManager {
      * @param params
      * @param callBack
      */
-    public void commonPost(String url, Map<String, String> params, final BaseCallBack callBack) {
+    public void commonPost(String url, Map<String, Object> params, final BaseCallBack callBack) {
         FormBody.Builder builder = new FormBody.Builder();
         if (params != null && params.size() > 0) {
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                builder.add(entry.getKey(), entry.getValue());
+            for (Map.Entry<String, Object> entry : params.entrySet()) {
+                builder.add(entry.getKey(), entry.getValue()+"");
             }
         }
         FormBody body = builder.build();
@@ -134,7 +135,8 @@ public class OkHttpManager {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            callBack.onFailure(new HttpException("onResponse is failed"));
+                            callBack.onFailure(new HttpException("onResponse is failed ! "));
+                            Log.d("CreateOrderActivity","result:"+result);
                         }
                     });
                 }

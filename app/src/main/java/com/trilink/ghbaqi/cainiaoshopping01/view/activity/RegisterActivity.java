@@ -96,7 +96,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void registerAccount() {
-        Map<String, String> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         params.put("phone",mPhoneNum);
         params.put("password", DESUtil.encode(Contants.DES_KEY, mPwd));
         OkHttpManager.getInstance().commonPost(Contants.API.REG, params, new BaseCallBack() {
@@ -119,6 +119,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     ToastUtil.showToast(RegisterActivity.this,"注册失败");
                 } else {                      // 注册成功 !
                     ToastUtil.showToast(RegisterActivity.this,"注册成功!!!!!");
+                    Log.d(TAG,loginRespMsg.toString());
                     mUserManager.clearUser();
                     mUserManager.clearToken();
                     RegisterActivity.this.finish();

@@ -92,7 +92,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void login() {
-        Map<String, String> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         String phoneNum = mEtNumber.getText().toString().trim();
         String pwd = mEtPwd.getText().toString().trim();
         if (TextUtils.isEmpty(phoneNum)||TextUtils.isEmpty(pwd)) {
