@@ -1,7 +1,7 @@
 package com.trilink.ghbaqi.cainiaoshopping01.view.fragment;
 
 import android.app.ProgressDialog;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
@@ -27,12 +27,15 @@ import com.trilink.ghbaqi.cainiaoshopping01.http.OkHttpManager;
 import com.trilink.ghbaqi.cainiaoshopping01.utils.CartManager;
 import com.trilink.ghbaqi.cainiaoshopping01.utils.Contants;
 import com.trilink.ghbaqi.cainiaoshopping01.utils.ToastUtil;
+import com.trilink.ghbaqi.cainiaoshopping01.view.activity.WaresDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.trilink.ghbaqi.cainiaoshopping01.view.activity.WaresListActivity.EXTRA_WARES;
 
 /**
  * Created by ghbaqi on 2017/4/15.
@@ -56,7 +59,7 @@ public class HotFragment extends BaseFragment {
     private static final int MORE_LOAD    = 0x012;         // 加载更多
     private static       int LOAD_MODE    = REFRESH_LOAD;
     private int     mMaxPage;
-    private Context mActivity;
+
 
     @Nullable
     @Override
@@ -135,8 +138,6 @@ public class HotFragment extends BaseFragment {
 
             @Override
             protected void bindData(BaseViewHolder holder, final Wares item) {
-
-
                 TextView tv_title = holder.findTextView(R.id.text_title);
                 ImageView iv = holder.findImageView(R.id.drawee_view);
                 TextView tv_price = holder.findTextView(R.id.text_price);
@@ -152,8 +153,6 @@ public class HotFragment extends BaseFragment {
                 tv_title.setText(item.getName());
                 tv_price.setText("￥" + item.getPrice());
                 Glide.with(HotFragment.this.getActivity()).load(item.getImgUrl()).into(iv);
-
-
             }
 
             @Override
@@ -165,11 +164,14 @@ public class HotFragment extends BaseFragment {
             @Override
             public void onItemClick(View itemView, int position) {
                 ToastUtil.showToast(HotFragment.this.getActivity(), "单击 :  " + position);
+                Wares wares = mDatas.get(position);
+                Intent intent = new Intent(mActivity, WaresDetailActivity.class);
+                intent.putExtra(EXTRA_WARES,wares);
+                startActivity(intent);
             }
         });
         mRecycleview.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecycleview.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         mRecycleview.setAdapter(mAdapter);
     }
-
 }

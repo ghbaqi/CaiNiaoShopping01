@@ -99,7 +99,6 @@ public class HomeFragment extends BaseFragment implements HomeCatgoryAdapter.OnC
      */
     @Override
     public void onClick(View view, Campaign campaign) {
-
         Intent intent = new Intent(mActivity, WaresListActivity.class);
         intent.putExtra(WaresListActivity.COMPAIGN_ID,campaign.getId());
         startActivity(intent);

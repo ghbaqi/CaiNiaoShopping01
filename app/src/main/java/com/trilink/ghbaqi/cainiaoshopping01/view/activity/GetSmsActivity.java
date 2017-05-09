@@ -19,6 +19,8 @@ import org.json.JSONObject;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import cn.smssdk.utils.SMSLog;
@@ -31,6 +33,8 @@ public class GetSmsActivity extends BaseActivity implements View.OnClickListener
     public static final String EXTRA_PWD                = "EXTRA_PWD";
     public static final String EXTRA_PHONE_NUM          = "EXTRA_PHONE_NUM";
     public static final String EXTRA_COUNTRY_CODE       = "EXTRA_COUNTRY_CODE";
+    @BindView(R.id.et_confirmpwd)
+    ClearEditText mEtConfirmpwd;
     private SmsListener   mSmsListener;
     private Handler       mHandler;
     private ClearEditText mEt_phonenum;
@@ -45,6 +49,7 @@ public class GetSmsActivity extends BaseActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_getsms);
+        ButterKnife.bind(this);
         initView();
         initSms();
 
@@ -105,6 +110,12 @@ public class GetSmsActivity extends BaseActivity implements View.OnClickListener
                     return;
                 } else if (mPwd.length() < 6 || mPwd.length() > 12) {
                     ToastUtil.showToast(this, "密码长度需要在6至12位");
+                    return;
+                } else if (TextUtils.isEmpty(mEtConfirmpwd.getText().toString().trim())) {
+                    ToastUtil.showToast(this, "请再次输入密码!");
+                    return;
+                } else if (!mPwd.equals(mEtConfirmpwd.getText().toString().trim())) {
+                    ToastUtil.showToast(this, "密码不一致, 请重新输入!");
                     return;
                 }
                 SMSSDK.getVerificationCode(mCountryCode, mPhoneNum);

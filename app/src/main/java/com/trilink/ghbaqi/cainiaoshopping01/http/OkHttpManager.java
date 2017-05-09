@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,8 +88,8 @@ public class OkHttpManager {
     }
 
 
-    public void commonGet(String url,HashMap<String,Object> params,final BaseCallBack callBack) {
-        commonGet(buildUrl(url,params),callBack);
+    public void commonGet(String url, HashMap<String, Object> params, final BaseCallBack callBack) {
+        commonGet(buildUrl(url, params), callBack);
     }
 
     /**
@@ -101,7 +103,7 @@ public class OkHttpManager {
         FormBody.Builder builder = new FormBody.Builder();
         if (params != null && params.size() > 0) {
             for (Map.Entry<String, Object> entry : params.entrySet()) {
-                builder.add(entry.getKey(), entry.getValue()+"");
+                builder.add(entry.getKey(), entry.getValue() + "");
             }
         }
         FormBody body = builder.build();
@@ -136,7 +138,7 @@ public class OkHttpManager {
                         @Override
                         public void run() {
                             callBack.onFailure(new HttpException("onResponse is failed ! "));
-                            Log.d("CreateOrderActivity","result:"+result);
+                            Log.d("CreateOrderActivity", "result:" + result);
                         }
                     });
                 }
@@ -145,9 +147,10 @@ public class OkHttpManager {
     }
 
     /**
-     * get 请求返回 jsonBean 对象
+     * get 请求
      */
     public <T> void getBeanData(String url, final Class<T> clazz, final JsonCallBack<T> callBack) {
+
 
         Request request = new Request.Builder()
                 .url(url)
@@ -171,9 +174,14 @@ public class OkHttpManager {
                 if (response.isSuccessful()) {
                     mHandler.post(new Runnable() {
                         @Override
-                        public void run() {
-                            T t = GsonUtil.parseJsonToBean(result, clazz);
-                            callBack.onSuccess(t);
+                        public void run() {                                //  坑的贼惨 !!!!
+                            if (clazz == null) {    // 集合数据
+                                T t = new Gson().fromJson(result, callBack.mType);
+                                callBack.onSuccess(t);
+                            } else {                // javabean 对象
+                                T t = GsonUtil.parseJsonToBean(result, clazz);
+                                callBack.onSuccess(t);
+                            }
                         }
                     });
                 } else {
@@ -232,15 +240,15 @@ public class OkHttpManager {
 
     }
 
-    private String buildUrl(String url, HashMap<String,Object> params){
+    private String buildUrl(String url, HashMap<String, Object> params) {
         String newUrl = null;
-        if (params==null||params.size()==0)
+        if (params == null || params.size() == 0)
             return url;
-        newUrl = url+"?";
+        newUrl = url + "?";
         for (Map.Entry<String, Object> entry : params.entrySet()) {
-            newUrl = newUrl + entry.getKey()+"="+entry.getValue()+"&" ;
+            newUrl = newUrl + entry.getKey() + "=" + entry.getValue() + "&";
         }
-        newUrl = newUrl.substring(0,newUrl.length()-1);
+        newUrl = newUrl.substring(0, newUrl.length() - 1);
         return newUrl;
     }
 

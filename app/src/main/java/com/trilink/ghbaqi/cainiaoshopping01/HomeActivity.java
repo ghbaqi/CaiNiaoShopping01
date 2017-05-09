@@ -16,6 +16,7 @@ import com.trilink.ghbaqi.cainiaoshopping01.view.fragment.CartFragment;
 import com.trilink.ghbaqi.cainiaoshopping01.view.fragment.CategoryFragment;
 import com.trilink.ghbaqi.cainiaoshopping01.view.fragment.HomeFragment;
 import com.trilink.ghbaqi.cainiaoshopping01.view.fragment.HotFragment;
+import com.trilink.ghbaqi.cainiaoshopping01.view.fragment.HotFragment02;
 import com.trilink.ghbaqi.cainiaoshopping01.view.fragment.MineFragment;
 
 import butterknife.BindView;
@@ -30,9 +31,9 @@ public class HomeActivity extends BaseActivity {
     FrameLayout     mTabcontent;
     @BindView(android.R.id.tabhost)
     FragmentTabHost mTabhost;
-    private String[] mTabTitle = new String[]{"首页","热卖","分类","购物车","我的"};
-    private int[] mTabIcon = new int[]{R.drawable.selector_tab_home,R.drawable.selector_tab_hot,R.drawable.selector_tab_category,R.drawable.selector_tab_cart,R.drawable.selector_tab_mine};
-    private Class[] mTabclasses = new Class[]{HomeFragment.class, HotFragment.class, CategoryFragment.class,CartFragment.class, MineFragment.class};
+    private String[] mTabTitle = new String[]{"首页","热卖","分类","购物车","我的","热卖02"};
+    private int[] mTabIcon = new int[]{R.drawable.selector_tab_home,R.drawable.selector_tab_hot,R.drawable.selector_tab_category,R.drawable.selector_tab_cart,R.drawable.selector_tab_mine,R.drawable.selector_tab_hot};
+    private Class[] mTabclasses = new Class[]{HomeFragment.class, HotFragment.class, CategoryFragment.class,CartFragment.class, MineFragment.class,HotFragment02.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void addTabs() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < mTabclasses.length; i++) {
             View indicatorView = View.inflate(this, R.layout.tab_view,null);
             ImageView iv = (ImageView) indicatorView.findViewById(R.id.iv_icon);
             iv.setBackgroundResource(mTabIcon[i]);

@@ -114,8 +114,6 @@
             android:paddingBottom="@dimen/largePadding"
             android:orientation="horizontal"
             >
-
-
             <TextView
 
                 android:layout_width="wrap_content"
@@ -140,7 +138,44 @@
                 android:layout_marginLeft="10dp"
                 android:inputType="textPassword"
                 />
+        </LinearLayout>
 
+        <View
+            style="@style/line_vertical"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/largePadding"
+            android:paddingBottom="@dimen/largePadding"
+            android:orientation="horizontal"
+            >
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="确认"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginRight="10dp"
+
+                />
+
+            <View
+                style="@style/line_horizontal"/>
+
+            <com.trilink.ghbaqi.cainiaoshopping01.view.widget.ClearEditText
+                android:id="@+id/et_confirmpwd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/editText_base"
+                android:hint="请再次输入密码!"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:inputType="textPassword"
+                />
         </LinearLayout>
 
 
